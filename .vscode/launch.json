@@ -1,0 +1,380 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "request": "launch",
+            "name": "Day 01",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day01/index.ts",
+            "cwd": "${workspaceFolder}/src/day01",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9201",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9201
+        },
+        {
+            "request": "launch",
+            "name": "Day 02",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day02/index.ts",
+            "cwd": "${workspaceFolder}/src/day02",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9202",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9202
+        },
+        {
+            "request": "launch",
+            "name": "Day 03",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day03/index.ts",
+            "cwd": "${workspaceFolder}/src/day03",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9203",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9203
+        },
+        {
+            "request": "launch",
+            "name": "Day 04",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day04/index.ts",
+            "cwd": "${workspaceFolder}/src/day04",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9204",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9204
+        },
+        {
+            "request": "launch",
+            "name": "Day 05",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day05/index.ts",
+            "cwd": "${workspaceFolder}/src/day05",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9205",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9205
+        },
+        {
+            "request": "launch",
+            "name": "Day 06",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day06/index.ts",
+            "cwd": "${workspaceFolder}/src/day06",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9206",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9206
+        },
+        {
+            "request": "launch",
+            "name": "Day 07",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day07/index.ts",
+            "cwd": "${workspaceFolder}/src/day07",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9207",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9207
+        },
+        {
+            "request": "launch",
+            "name": "Day 08",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day08/index.ts",
+            "cwd": "${workspaceFolder}/src/day08",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9208",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9208
+        },
+        {
+            "request": "launch",
+            "name": "Day 09",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day09/index.ts",
+            "cwd": "${workspaceFolder}/src/day09",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9209",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9209
+        },
+        {
+            "request": "launch",
+            "name": "Day 10",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day10/index.ts",
+            "cwd": "${workspaceFolder}/src/day10",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9210",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9210
+        },
+        {
+            "request": "launch",
+            "name": "Day 11",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day11/index.ts",
+            "cwd": "${workspaceFolder}/src/day11",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9211",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9211
+        },
+        {
+            "request": "launch",
+            "name": "Day 12",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day12/index.ts",
+            "cwd": "${workspaceFolder}/src/day12",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9212",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9212
+        },
+        {
+            "request": "launch",
+            "name": "Day 13",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day13/index.ts",
+            "cwd": "${workspaceFolder}/src/day13",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9213",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9213
+        },
+        {
+            "request": "launch",
+            "name": "Day 14",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day14/index.ts",
+            "cwd": "${workspaceFolder}/src/day14",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9214",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9214
+        },
+        {
+            "request": "launch",
+            "name": "Day 15",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day15/index.ts",
+            "cwd": "${workspaceFolder}/src/day15",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9215",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9215
+        },
+        {
+            "request": "launch",
+            "name": "Day 16",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day16/index.ts",
+            "cwd": "${workspaceFolder}/src/day16",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9216",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9216
+        },
+        {
+            "request": "launch",
+            "name": "Day 17",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day17/index.ts",
+            "cwd": "${workspaceFolder}/src/day17",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9217",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9217
+        },
+        {
+            "request": "launch",
+            "name": "Day 18",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day18/index.ts",
+            "cwd": "${workspaceFolder}/src/day18",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9218",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9218
+        },
+        {
+            "request": "launch",
+            "name": "Day 19",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day19/index.ts",
+            "cwd": "${workspaceFolder}/src/day19",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9219",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9219
+        },
+        {
+            "request": "launch",
+            "name": "Day 20",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day20/index.ts",
+            "cwd": "${workspaceFolder}/src/day20",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9220",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9220
+        },
+        {
+            "request": "launch",
+            "name": "Day 21",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day21/index.ts",
+            "cwd": "${workspaceFolder}/src/day21",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9221",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9221
+        },
+        {
+            "request": "launch",
+            "name": "Day 22",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day22/index.ts",
+            "cwd": "${workspaceFolder}/src/day22",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9222",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9222
+        },
+        {
+            "request": "launch",
+            "name": "Day 23",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day23/index.ts",
+            "cwd": "${workspaceFolder}/src/day23",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9223",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9223
+        },
+        {
+            "request": "launch",
+            "name": "Day 24",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day24/index.ts",
+            "cwd": "${workspaceFolder}/src/day24",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9224",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9224
+        },
+        {
+            "request": "launch",
+            "name": "Day 25",
+            "type": "pwa-node",
+            "program": "${workspaceFolder}/src/day25/index.ts",
+            "cwd": "${workspaceFolder}/src/day25",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "run",
+                "--unstable",
+                "--inspect-brk=127.0.0.1:9225",
+                "--allow-all"
+            ],
+            "attachSimplePort": 9225
+        }
+    ]
+}
