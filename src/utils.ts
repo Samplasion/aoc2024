@@ -383,3 +383,45 @@ export function sides<T>(nodes: Node<T>[]): number {
 
   return edges;
 }
+
+export class Fraction {
+  private n: number;
+  private d: number;
+
+  constructor(n: number, d: number) {
+    const gcd = this.gcd(n, d);
+    [n, d] = [n / gcd, d / gcd];
+    this.n = n;
+    this.d = d;
+  }
+
+  static fromString(str: string) {
+    const [n, d] = str.split("/").map(Number);
+    return new Fraction(n, d);
+  }
+
+  reduce() {
+    const gcd = this.gcd(this.n, this.d);
+    return new Fraction(this.n / gcd, this.d / gcd);
+  }
+
+  private gcd(a: number, b: number): number {
+    return b === 0 ? a : this.gcd(b, a % b);
+  }
+
+  add(f: Fraction) {
+    return new Fraction(this.n * f.d + f.n * this.d, this.d * f.d).reduce();
+  }
+
+  sub(f: Fraction) {
+    return new Fraction(this.n * f.d - f.n * this.d, this.d * f.d).reduce();
+  }
+
+  isInteger() {
+    return this.d === 1;
+  }
+
+  toNumber() {
+    return this.n / this.d;
+  }
+}
