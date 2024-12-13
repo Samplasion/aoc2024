@@ -161,10 +161,10 @@ Total time: 647ms
 
 ### Day 13
 
-✅ Part 1 (in 11.0ms)  
-✅ Part 2 (in 16.0ms)
+✅ Part 1 (in 1.29ms)  
+✅ Part 2 (in 0.91ms)
 
-Total time: 27.0ms
+Total time: 2.19ms
 
 
 ### Day 14
