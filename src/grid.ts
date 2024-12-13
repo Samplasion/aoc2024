@@ -1,3 +1,5 @@
+import { Node, Vector } from "./utils.ts";
+
 export type Position = { x: number, y: number };
 
 export default class Grid<T> {
@@ -47,8 +49,8 @@ export default class Grid<T> {
     this._data[y][x] = value;
   }
 
-  get(x: number, y: number): T {
-    return this._data[y][x];
+  get(x: number, y: number): T | null {
+    return this._data[y]?.[x];
   }
 
   map<U>(mapper: (value: T, x: number, y: number) => U): Array<U> {
@@ -58,7 +60,7 @@ export default class Grid<T> {
   forEach(callback: (value: T, x: number, y: number) => void): void {
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
-        callback(this.get(x, y), x, y);
+        callback(this.get(x, y)!, x, y);
       }
     }
   }
@@ -66,7 +68,7 @@ export default class Grid<T> {
   findIndex(predicate: (value: T, x: number, y: number) => boolean): Position | null {
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
-        if (predicate(this.get(x, y), x, y)) {
+        if (predicate(this.get(x, y)!, x, y)) {
           return { x, y };
         }
       }
@@ -88,7 +90,17 @@ export default class Grid<T> {
   }
 
   toPrettyString(): string {
-    return this._data.map((row) => row.join("")).join("\n");
+    let string = "";
+
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        string += (this.get(x, y) ?? " ").toString();
+      }
+
+      string += "\n";
+    }
+
+    return string;
   }
 
   isOutOfBounds(x: number, y: number): boolean {
@@ -97,5 +109,9 @@ export default class Grid<T> {
 
   toArray(): T[][] {
     return this._data.map((row) => [...row]);
+  }
+
+  toNodes(): Node<T>[][] {
+    return this._data.map((row, y) => row.map((value, x) => ({ position: new Vector(x, y), value })));
   }
 }
