@@ -1,6 +1,5 @@
 import Grid from "./grid.ts";
 
-// Add your utilities here
 export function create2DArray<T>(width: number, height: number, value: T): T[][] {
   return Array.from({ length: height }, () => Array.from({ length: width }, () => value));
 }
