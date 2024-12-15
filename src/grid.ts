@@ -45,12 +45,32 @@ export default class Grid<T> {
     return this._data.length;
   }
 
-  set(x: number, y: number, value: T): void {
-    this._data[y][x] = value;
+  set(x: number, y: number, value: T): void;
+  set(pos: Vector, value: T): void;
+  set(pos: Position, value: T): void
+  set(x: number | Vector | Position, y: number | T, value?: T): void {
+    if (x instanceof Vector) {
+      this._data[x.y][x.x] = y as T;
+      return;
+    } else if (typeof x === "object") {
+      this._data[x.y][x.x] = y as T;
+      return;
+    }
+
+    this._data[y as number][x as number] = value!;
   }
 
-  get(x: number, y: number): T | null {
-    return this._data[y]?.[x];
+  get(x: number, y: number): T | null;
+  get(pos: Vector): T | null;
+  get(pos: Position): T | null
+  get(x: number | Vector | Position, y?: number): T | null {
+    if (x instanceof Vector) {
+      return this._data[x.y]?.[x.x];
+    } else if (typeof x === "object") {
+      return this._data[x.y]?.[x.x];
+    }
+    
+    return this._data[y!]?.[x];
   }
 
   map<U>(mapper: (value: T, x: number, y: number) => U): Array<U> {

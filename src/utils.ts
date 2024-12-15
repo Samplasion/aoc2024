@@ -1,4 +1,4 @@
-import Grid from "./grid.ts";
+import Grid, { Position } from "./grid.ts";
 
 export function create2DArray<T>(width: number, height: number, value: T): T[][] {
   return Array.from({ length: height }, () => Array.from({ length: width }, () => value));
@@ -69,15 +69,19 @@ export class Vector {
       switch (letter) {
           case "N":
           case "U":
+          case "^":
               return new Vector(0, 1);
           case "S":
           case "D":
+          case "v":
               return new Vector(0, -1);
           case "E":
           case "R":
+          case ">":
               return new Vector(1, 0);
           case "W":
           case "L":
+          case "<":
               return new Vector(-1, 0);
       }
   }
@@ -96,6 +100,10 @@ export class Vector {
           for (let y = fromY; y <= toY; y++)
               positions.push(new Vector(x, y));
       return positions;
+  }
+
+  static fromPosition(pos: Position) {
+      return new Vector(pos.x, pos.y);
   }
 
   get sqmag() {
@@ -131,6 +139,14 @@ export class Vector {
 
   get tuple() {
       return [this.x, this.y];
+  }
+
+  get isVertical() {
+    return this.x == 0;
+  }
+
+  get isHorizontal() {
+    return this.y == 0;
   }
 
   add(vec: Vector): Vector {
@@ -181,6 +197,14 @@ export class Vector {
 
   getIn<T>(grid: T[][]): T | null {
       return grid[this.x]?.[this.y];
+  }
+
+  flipX(): Vector {
+    return new Vector(-this.x, this.y);
+  }
+
+  flipY(): Vector {
+    return new Vector(this.x, -this.y);
   }
 }
 // #endregion
