@@ -87,8 +87,8 @@ export class Vector {
   }
 
   static parse(string: string) {
-      if (!/\(\d+,\d+\)/.test(string)) throw new SyntaxError();
-      const [x, y] = string.slice(1, -1).split(",").map(toInt);
+      if (!/\(\d+(?:,|;) ?\d+\)/.test(string)) throw new SyntaxError();
+      const [x, y] = string.slice(1, -1).split(/(,|;) ?/).map(toInt);
       return new Vector(x, y);
   }
 
@@ -196,7 +196,7 @@ export class Vector {
   }
 
   getIn<T>(grid: T[][]): T | null {
-      return grid[this.x]?.[this.y];
+      return grid[this.y]?.[this.x];
   }
 
   flipX(): Vector {
@@ -205,6 +205,18 @@ export class Vector {
 
   flipY(): Vector {
     return new Vector(this.x, -this.y);
+  }
+
+  rotateSquare(turns: number): Vector {
+    turns = mod(turns, 4);
+
+    switch (turns) {
+      case 1: return new Vector(-this.y, this.x);
+      case 2: return this.neg();
+      case 3: return new Vector(this.y, -this.x);
+    }
+
+    return this.clone();
   }
 }
 // #endregion
@@ -215,13 +227,14 @@ export interface Node<T> {
   value: T,
 }
 export type DistancedNode<T> = [node: Node<T>, distance: number];
+export type PathTrackingNode<T> = [node: Node<T>, distance: number, path: Node<T>[]];
 export type BFSMatcher<T> = (a: Node<T>, b: Node<T>) => boolean;
-export type BFSCallback<T> = (node: Node<T>, queue: DistancedNode<T>[]) => boolean;
-export interface BFSParameters<T> {
+export type BFSCallback<T, C = DistancedNode<T>> = (node: Node<T>, queue: C[]) => boolean;
+export interface BFSParameters<T, C = DistancedNode<T>> {
   matcher: BFSMatcher<T>,
   startPosition: Vector,
   endPosition?: Vector,
-  endCondition?: BFSCallback<T>,
+  endCondition?: BFSCallback<T, C>,
 }
 
 export function toNodes<T>(grid: T[][]): Node<T>[][] {
@@ -446,5 +459,100 @@ export class Fraction {
 
   toNumber() {
     return this.n / this.d;
+  }
+}
+
+export class PriorityQueue<T> {
+  private data: T[] = [];
+  private comparator: (a: T, b: T) => number;
+
+  constructor(comparator: (a: T, b: T) => number) {
+    this.comparator = comparator;
+  }
+
+  push(value: T) {
+    this.data.push(value);
+    this.data.sort(this.comparator);
+  }
+
+  pop() {
+    return this.data.shift();
+  }
+
+  peek(): T | undefined {
+    return this.data[0];
+  }
+
+  get length() {
+    return this.data.length;
+  }
+
+  get isEmpty() { return this.length === 0; }
+  get isNotEmpty() { return this.length !== 0; }
+}
+
+type RangeCallback<T = void> = (index: number) => T;
+export class Range {
+  from: number;
+  to: number;
+  step: number;
+
+  constructor(from: number, to?: number, step = 1) {
+    if (to == null) {
+      this.from = 0;
+      this.to = from;
+    } else {
+      this.from = from;
+      this.to = to;
+    }
+    this.step = ~~step;
+  }
+
+  get size() {
+    return Math.ceil((this.to - this.from) / this.step);
+  }
+
+  withStep(step: number) {
+    return new Range(this.from, this.to, step);
+  }
+
+  toArray() {
+    const result: number[] = [];
+    this.forEach(result.push.bind(result));
+    return result;
+  }
+
+  forEach(callback: RangeCallback) {
+    if (this.step > 0)
+      for (let i = this.from; i < this.to; i += this.step)
+        callback(i);
+    else {
+      // this.step < 0
+      // deno-lint-ignore for-direction
+      for (let i = this.from; i > this.to; i += this.step)
+        callback(i);
+    }
+  }
+
+  map<U>(callback: RangeCallback<U>) {
+    const result: U[] = [];
+    this.forEach(i => result.push(callback(i)));
+    return result;
+  }
+
+  contains(num: number) {
+    return num.betweenEx(this.from, this.to);
+  }
+
+  *[Symbol.iterator]() {
+    if (this.step > 0) {
+      for (let i = this.from; i < this.to; i += this.step)
+        yield i;
+    } else {
+      // this.step < 0
+      // deno-lint-ignore for-direction
+      for (let i = this.from; i > this.to; i += this.step)
+        yield i;
+    }
   }
 }

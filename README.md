@@ -25,8 +25,8 @@
 [![Day 13](https://img.shields.io/badge/Day%2013-%E2%98%85%E2%98%85-brightgreen.svg?style=flat-square)](/src/day13)
 [![Day 14](https://img.shields.io/badge/Day%2014-%E2%98%85%E2%98%85-brightgreen.svg?style=flat-square)](/src/day14)
 [![Day 15](https://img.shields.io/badge/Day%2015-%E2%98%85%E2%98%85-brightgreen.svg?style=flat-square)](/src/day15)
-![Day 16](https://img.shields.io/badge/Day%2016-%E2%98%86%E2%98%86-lightgrey.svg?style=flat-square)
-![Day 17](https://img.shields.io/badge/Day%2017-%E2%98%86%E2%98%86-lightgrey.svg?style=flat-square)
+[![Day 16](https://img.shields.io/badge/Day%2016-%E2%98%85%E2%98%85-brightgreen.svg?style=flat-square)](/src/day16)
+[![Day 17](https://img.shields.io/badge/Day%2017-%E2%98%85%E2%98%85-brightgreen.svg?style=flat-square)](/src/day17)
 ![Day 18](https://img.shields.io/badge/Day%2018-%E2%98%86%E2%98%86-lightgrey.svg?style=flat-square)
 ![Day 19](https://img.shields.io/badge/Day%2019-%E2%98%86%E2%98%86-lightgrey.svg?style=flat-square)
 ![Day 20](https://img.shields.io/badge/Day%2020-%E2%98%86%E2%98%86-lightgrey.svg?style=flat-square)
@@ -185,18 +185,18 @@ Total time: 138ms
 
 ### Day 16
 
-❌ Part 1  
-❌ Part 2
+✅ Part 1 (in 96.1ms)  
+✅ Part 2 (in 47s)
 
-Total time: 0.00ms
+Total time: 47s
 
 
 ### Day 17
 
-❌ Part 1  
-❌ Part 2
+✅ Part 1 (in 0.32ms)  
+✅ Part 2 (in 83.9ms)
 
-Total time: 0.00ms
+Total time: 84.2ms
 
 
 ### Day 18

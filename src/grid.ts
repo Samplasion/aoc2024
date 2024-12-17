@@ -45,6 +45,10 @@ export default class Grid<T> {
     return this._data.length;
   }
 
+  clone(): Grid<T> {
+    return Grid.fromArray(this.toArray());
+  }
+
   set(x: number, y: number, value: T): void;
   set(pos: Vector, value: T): void;
   set(pos: Position, value: T): void
@@ -71,6 +75,18 @@ export default class Grid<T> {
     }
     
     return this._data[y!]?.[x];
+  }
+
+  mapGrid<U>(mapper: (value: T, x: number, y: number) => U): Grid<U> {
+    const newGrid = new Grid<U>(this.width, this.height, mapper(this.get(0, 0)!, 0, 0));
+
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        newGrid.set(x, y, mapper(this.get(x, y)!, x, y));
+      }
+    }
+
+    return newGrid;
   }
 
   map<U>(mapper: (value: T, x: number, y: number) => U): Array<U> {
@@ -133,5 +149,29 @@ export default class Grid<T> {
 
   toNodes(): Node<T>[][] {
     return this._data.map((row, y) => row.map((value, x) => ({ position: new Vector(x, y), value })));
+  }
+
+  get positions(): Generator<Vector> {
+    return (function* (grid: Grid<T>) {
+      for (let y = 0; y < grid.height; y++) {
+        for (let x = 0; x < grid.width; x++) {
+          yield new Vector(x, y);
+        }
+      }
+    })(this);
+  }
+
+  neighbors(x: number, y: number): Generator<T>;
+  neighbors(pos: Vector): Generator<T>;
+  neighbors(pos: Position): Generator<T>;
+  *neighbors(x: number | Vector | Position, y?: number): Generator<T>{
+    for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+      const nx = x instanceof Vector ? x.x + dx : typeof x === "object" ? x.x + dx : x + dx;
+      const ny = x instanceof Vector ? x.y + dy : typeof x === "object" ? x.y + dy : y! + dy;
+
+      if (!this.isOutOfBounds(nx, ny)) {
+        yield this.get(nx, ny)!;
+      }
+    }
   }
 }
