@@ -25,12 +25,13 @@ const part1 = (rawInput: string) => {
 const part2 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
+  const cpu = new CPU();
+
   function checkDigit(a: bigint, digit: number): bigint[] | null {
     if (digit >= input.program.length) {
       return [a >> 3n];
     }
-
-    const cpu = new CPU();
+    
     cpu.reset(Number(a), input.b, input.c);
     const out = cpu.run(input.program).reverse();
 

@@ -193,10 +193,10 @@ Total time: 47s
 
 ### Day 17
 
-✅ Part 1 (in 0.53ms)  
-✅ Part 2 (in 18.0ms)
+✅ Part 1 (in 0.15ms)  
+✅ Part 2 (in 12.9ms)
 
-Total time: 18.5ms
+Total time: 13.1ms
 
 
 ### Day 18

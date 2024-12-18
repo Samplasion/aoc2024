@@ -11,6 +11,8 @@ export default class CPU {
     this.a = a;
     this.b = b;
     this.c = c;
+
+    this.out = [];
   }
 
   private combo(num: number) {
