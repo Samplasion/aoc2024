@@ -1,4 +1,5 @@
 <!-- Entries between SOLUTIONS and RESULTS tags are auto-generated -->
+<!--useTabularResults=true-->
 
 # 🎄 Advent of Code 2024 🎄
 
@@ -62,206 +63,33 @@ aoc run 25
 ## Results
 
 <!--RESULTS-->
-
-### Day 1
-
-✅ Part 1 (in 1.53ms)  
-✅ Part 2 (in 0.72ms)
-
-Total time: 2.25ms
-
-
-### Day 2
-
-✅ Part 1 (in 1.84ms)  
-✅ Part 2 (in 7.59ms)
-
-Total time: 9.43ms
-
-
-### Day 3
-
-✅ Part 1 (in 0.52ms)  
-✅ Part 2 (in 0.32ms)
-
-Total time: 0.84ms
-
-
-### Day 4
-
-✅ Part 1 (in 42.8ms)  
-✅ Part 2 (in 9.48ms)
-
-Total time: 52.3ms
-
-
-### Day 5
-
-✅ Part 1 (in 2.90ms)  
-✅ Part 2 (in 2.38ms)
-
-Total time: 5.28ms
-
-
-### Day 6
-
-✅ Part 1 (in 12.4ms)  
-✅ Part 2 (in 77s)
-
-Total time: 77s
-
-
-### Day 7
-
-✅ Part 1 (in 396ms)  
-✅ Part 2 (in 34s)
-
-Total time: 34s
-
-
-### Day 8
-
-✅ Part 1 (in 2.66ms)  
-✅ Part 2 (in 4.14ms)
-
-Total time: 6.80ms
-
-
-### Day 9
-
-✅ Part 1 (in 1s)  
-✅ Part 2 (in 646ms)
-
-Total time: 1s
-
-
-### Day 10
-
-✅ Part 1 (in 15.9ms)  
-✅ Part 2 (in 2.05ms)
-
-Total time: 18.0ms
-
-
-### Day 11
-
-✅ Part 1 (in 7.75ms)  
-✅ Part 2 (in 72.6ms)
-
-Total time: 80.4ms
-
-
-### Day 12
-
-✅ Part 1 (in 461ms)  
-✅ Part 2 (in 186ms)
-
-Total time: 647ms
-
-
-### Day 13
-
-✅ Part 1 (in 1.29ms)  
-✅ Part 2 (in 0.91ms)
-
-Total time: 2.19ms
-
-
-### Day 14
-
-✅ Part 1 (in 43.3ms)  
-✅ Part 2 (in 1s)
-
-Total time: 1s
-
-
-### Day 15
-
-✅ Part 1 (in 20.3ms)  
-✅ Part 2 (in 117ms)
-
-Total time: 138ms
-
-
-### Day 16
-
-✅ Part 1 (in 96.1ms)  
-✅ Part 2 (in 47s)
-
-Total time: 47s
-
-
-### Day 17
-
-✅ Part 1 (in 0.15ms)  
-✅ Part 2 (in 12.9ms)
-
-Total time: 13.1ms
-
-
-### Day 18
-
-✅ Part 1 (in 46.7ms)  
-✅ Part 2 (in 184ms)
-
-Total time: 231ms
-
-
-### Day 19
-
-✅ Part 1 (in 228ms)  
-✅ Part 2 (in 151ms)
-
-Total time: 380ms
-
-
-### Day 20
-
-❌ Part 1  
-❌ Part 2
-
-Total time: 0.00ms
-
-
-### Day 21
-
-❌ Part 1  
-❌ Part 2
-
-Total time: 0.00ms
-
-
-### Day 22
-
-❌ Part 1  
-❌ Part 2
-
-Total time: 0.00ms
-
-
-### Day 23
-
-❌ Part 1  
-❌ Part 2
-
-Total time: 0.00ms
-
-
-### Day 24
-
-❌ Part 1  
-❌ Part 2
-
-Total time: 0.00ms
-
-
-### Day 25
-
-❌ Part 1  
-❌ Part 2
-
-Total time: 0.00ms
-
+| Day  | Part 1 | Part 2 | Total time |
+|------|--------|--------|------------|
+|  1  | ✅ (in 1.53ms) | ✅ (in 0.72ms) | 2.25ms |
+|  2  | ✅ (in 1.84ms) | ✅ (in 7.59ms) | 9.43ms |
+|  3  | ✅ (in 0.52ms) | ✅ (in 0.32ms) | 0.84ms |
+|  4  | ✅ (in 42.8ms) | ✅ (in 9.48ms) | 52.3ms |
+|  5  | ✅ (in 2.90ms) | ✅ (in 2.38ms) | 5.28ms |
+|  6  | ✅ (in 12.4ms) | ✅ (in 77s) | 77s |
+|  7  | ✅ (in 396ms) | ✅ (in 34s) | 34s |
+|  8  | ✅ (in 2.66ms) | ✅ (in 4.14ms) | 6.80ms |
+|  9  | ✅ (in 1s) | ✅ (in 646ms) | 1s |
+|  10  | ✅ (in 15.9ms) | ✅ (in 2.05ms) | 18.0ms |
+|  11  | ✅ (in 7.75ms) | ✅ (in 72.6ms) | 80.4ms |
+|  12  | ✅ (in 461ms) | ✅ (in 186ms) | 647ms |
+|  13  | ✅ (in 1.29ms) | ✅ (in 0.91ms) | 2.19ms |
+|  14  | ✅ (in 43.3ms) | ✅ (in 1s) | 1s |
+|  15  | ✅ (in 20.3ms) | ✅ (in 117ms) | 138ms |
+|  16  | ✅ (in 96.1ms) | ✅ (in 47s) | 47s |
+|  17  | ✅ (in 0.15ms) | ✅ (in 12.9ms) | 13.1ms |
+|  18  | ✅ (in 46.7ms) | ✅ (in 184ms) | 231ms |
+|  19  | ✅ (in 228ms) | ✅ (in 151ms) | 380ms |
+|  20  | ❌ | ❌ |  |
+|  21  | ❌ | ❌ |  |
+|  22  | ❌ | ❌ |  |
+|  23  | ❌ | ❌ |  |
+|  24  | ❌ | ❌ |  |
+|  25  | ❌ | ❌ |  |
 <!--/RESULTS-->
 
 ---
