@@ -541,7 +541,7 @@ export class Range {
   }
 
   contains(num: number) {
-    return num.betweenEx(this.from, this.to);
+    return num >= this.from && num < this.to;
   }
 
   *[Symbol.iterator]() {
@@ -555,4 +555,14 @@ export class Range {
         yield i;
     }
   }
+}
+
+export function memoize<T, U>(fn: (arg: T) => U): (arg: T) => U {
+  const cache = new Map<T, U>();
+  return (arg: T) => {
+    if (!cache.has(arg)) {
+      cache.set(arg, fn(arg));
+    }
+    return cache.get(arg)!;
+  };
 }
