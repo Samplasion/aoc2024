@@ -1,7 +1,5 @@
 import { Node, Vector } from "./utils.ts";
 
-export type Position = { x: number, y: number };
-
 export default class Grid<T> {
   private _data: T[][];
 
@@ -51,12 +49,8 @@ export default class Grid<T> {
 
   set(x: number, y: number, value: T): void;
   set(pos: Vector, value: T): void;
-  set(pos: Position, value: T): void
-  set(x: number | Vector | Position, y: number | T, value?: T): void {
+  set(x: number | Vector, y: number | T, value?: T): void {
     if (x instanceof Vector) {
-      this._data[x.y][x.x] = y as T;
-      return;
-    } else if (typeof x === "object") {
       this._data[x.y][x.x] = y as T;
       return;
     }
@@ -66,11 +60,8 @@ export default class Grid<T> {
 
   get(x: number, y: number): T | null;
   get(pos: Vector): T | null;
-  get(pos: Position): T | null
-  get(x: number | Vector | Position, y?: number): T | null {
+  get(x: number | Vector, y?: number): T | null {
     if (x instanceof Vector) {
-      return this._data[x.y]?.[x.x];
-    } else if (typeof x === "object") {
       return this._data[x.y]?.[x.x];
     }
     
@@ -101,11 +92,11 @@ export default class Grid<T> {
     }
   }
 
-  findIndex(predicate: (value: T, x: number, y: number) => boolean): Position | null {
+  findIndex(predicate: (value: T, x: number, y: number) => boolean): Vector | null {
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         if (predicate(this.get(x, y)!, x, y)) {
-          return { x, y };
+          return new Vector(x, y);
         }
       }
     }
@@ -113,12 +104,16 @@ export default class Grid<T> {
     return null;
   }
 
-  allPositionsWhere(predicate: (value: T, x: number, y: number) => boolean): Position[] {
-    const positions: Position[] = [];
+  find(value: T): Vector | null {
+    return this.findIndex((v) => v === value);
+  }
+
+  allPositionsWhere(predicate: (value: T, x: number, y: number) => boolean): Vector[] {
+    const positions: Vector[] = [];
 
     this.forEach((value, x, y) => {
       if (predicate(value, x, y)) {
-        positions.push({ x, y });
+        positions.push(new Vector(x, y));
       }
     });
 
@@ -163,15 +158,87 @@ export default class Grid<T> {
 
   neighbors(x: number, y: number): Generator<T>;
   neighbors(pos: Vector): Generator<T>;
-  neighbors(pos: Position): Generator<T>;
-  *neighbors(x: number | Vector | Position, y?: number): Generator<T>{
+  *neighbors(x: number | Vector, y?: number): Generator<T>{
     for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
-      const nx = x instanceof Vector ? x.x + dx : typeof x === "object" ? x.x + dx : x + dx;
-      const ny = x instanceof Vector ? x.y + dy : typeof x === "object" ? x.y + dy : y! + dy;
+      const nx = x instanceof Vector ? x.x + dx : x + dx;
+      const ny = x instanceof Vector ? x.y + dy : y! + dy;
 
       if (!this.isOutOfBounds(nx, ny)) {
         yield this.get(nx, ny)!;
       }
     }
+  }
+
+  getShortestPath(start: Vector, end: Vector, isWalkable: (value: T) => boolean): { distance: number; path: Vector[], distances: number[][] } | null {
+    const rows = this.height;
+    const cols = this.width;
+    const directions = Vector.DIRECTIONS;
+  
+    const distance: number[][] = Array.from(
+      { length: rows },
+      () => Array(cols).fill(Infinity),
+    );
+    const previous: (Vector | null)[][] = Array.from(
+      { length: rows },
+      () => Array(cols).fill(null),
+    );
+    const visited: boolean[][] = Array.from(
+      { length: rows },
+      () => Array(cols).fill(false),
+    );
+  
+    const queue: { point: Vector; dist: number }[] = [];
+    distance[start.x][start.y] = 0;
+    queue.push({ point: start, dist: 0 });
+  
+    while (queue.length > 0) {
+      queue.sort((a, b) => a.dist - b.dist);
+      const { point } = queue.shift()!;
+      const { x, y } = point;
+  
+      if (visited[x][y]) continue;
+      visited[x][y] = true;
+  
+      // We found the end; reconstruct the path
+      if (x === end.x && y === end.y) {
+        const path: Vector[] = [];
+        let current: Vector | null = end;
+  
+        while (current) {
+          path.push(current);
+          current = previous[current.x][current.y];
+        }
+  
+        return { distance: distance[end.x][end.y], path: path.reverse(), distances: distance };
+      }
+  
+      for (const dir of directions) {
+        const newX = x + dir.x;
+        const newY = y + dir.y;
+  
+        if (!this.isOutOfBounds(newX, newY) && !visited[newX][newY]) {
+          let adjacentWeight = 0;
+  
+          const previousP = new Vector(x, y);
+          const current = new Vector(newX, newY);
+  
+          if (!isWalkable(this.get(newX, newY)!)) {
+            adjacentWeight = Infinity;
+          } else {
+            adjacentWeight = 1;
+          }
+  
+          const newDist = distance[x][y] + adjacentWeight;
+  
+          if (newDist < distance[newX][newY]) {
+            distance[newX][newY] = newDist;
+            previous[newX][newY] = previousP;
+            queue.push({ point: current, dist: newDist });
+          }
+        }
+      }
+    }
+  
+    return null;
   }
 }

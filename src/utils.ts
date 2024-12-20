@@ -1,4 +1,4 @@
-import Grid, { Position } from "./grid.ts";
+import Grid from "./grid.ts";
 
 export function create2DArray<T>(width: number, height: number, value: T): T[][] {
   return Array.from({ length: height }, () => Array.from({ length: width }, () => value));
@@ -66,79 +66,75 @@ export class Vector {
 
   static DIRECTIONS = "NESW".split("").map(l => this.from(l)!);
   static from(letter: string) {
-      switch (letter) {
-          case "N":
-          case "U":
-          case "^":
-              return new Vector(0, 1);
-          case "S":
-          case "D":
-          case "v":
-              return new Vector(0, -1);
-          case "E":
-          case "R":
-          case ">":
-              return new Vector(1, 0);
-          case "W":
-          case "L":
-          case "<":
-              return new Vector(-1, 0);
-      }
+    switch (letter) {
+      case "N":
+      case "U":
+      case "^":
+        return new Vector(0, 1);
+      case "S":
+      case "D":
+      case "v":
+        return new Vector(0, -1);
+      case "E":
+      case "R":
+      case ">":
+        return new Vector(1, 0);
+      case "W":
+      case "L":
+      case "<":
+        return new Vector(-1, 0);
+    }
   }
 
   static parse(string: string) {
-      if (!/\(\d+(?:,|;) ?\d+\)/.test(string)) throw new SyntaxError();
-      const [x, y] = string.slice(1, -1).split(/(,|;) ?/).map(toInt);
-      return new Vector(x, y);
+    if (!/\(\d+(?:,|;) ?\d+\)/.test(string)) throw new SyntaxError();
+    const [x, y] = string.slice(1, -1).split(/(,|;) ?/).map(toInt);
+    return new Vector(x, y);
   }
 
   static intermediate(from: Vector, to: Vector) {
-      const positions: Vector[] = [];
-      const [fromX, toX] = [Math.min(from.x, to.x), Math.max(from.x, to.x)];
-      const [fromY, toY] = [Math.min(from.y, to.y), Math.max(from.y, to.y)];
-      for (let x = fromX; x <= toX; x++)
-          for (let y = fromY; y <= toY; y++)
-              positions.push(new Vector(x, y));
-      return positions;
-  }
-
-  static fromPosition(pos: Position) {
-      return new Vector(pos.x, pos.y);
+    const positions: Vector[] = [];
+    const [fromX, toX] = [Math.min(from.x, to.x), Math.max(from.x, to.x)];
+    const [fromY, toY] = [Math.min(from.y, to.y), Math.max(from.y, to.y)];
+    for (let x = fromX; x <= toX; x++)
+      for (let y = fromY; y <= toY; y++)
+        positions.push(new Vector(x, y));
+    return positions;
   }
 
   get sqmag() {
-      return this.x ** 2 + this.y ** 2
+    return this.x ** 2 + this.y ** 2
   }
 
   get mag() {
-      return Math.sqrt(this.sqmag);
+    return Math.sqrt(this.sqmag);
   }
 
   get quadrant() {
-      if (this.x < 0)
-          return this.y < 0 ? 3 : 2;
-      else
-          return this.y < 0 ? 4 : 1;
+    if (this.x < 0)
+      return this.y < 0 ? 3 : 2;
+    else
+      return this.y < 0 ? 4 : 1;
   }
 
   get direction() {
-      if (this.x != 0 && this.y != 0)
-          return null;
-      if (this.x == 0)
-          return this.y > 0 ? "N" : "S";
-      else
-          return this.x > 0 ? "E" : "W";
+    if (this.x != 0 && this.y != 0)
+      return null;
+    if (this.x == 0)
+      return this.y > 0 ? "N" : "S";
+    else
+      return this.x > 0 ? "E" : "W";
   }
 
   get unit() {
-      return new Vector(
-          this.x / this.mag,
-          this.y / this.mag,
-      );
+    return new Vector(
+      this.x / this.mag,
+      this.y / this.mag,
+    );
   }
 
   get tuple() {
-      return [this.x, this.y];
+    return [this.x, this.y];
   }
 
   get isVertical() {
@@ -150,53 +146,57 @@ export class Vector {
   }
 
   add(vec: Vector): Vector {
-      return new Vector(this.x + vec.x, this.y + vec.y);
+    return new Vector(this.x + vec.x, this.y + vec.y);
   }
 
   subtract(vec: Vector): Vector {
-      return this.add(vec.neg());
+    return this.add(vec.neg());
+  }
+
+  multiply(lambda: number): Vector {
+    return new Vector(this.x * lambda, this.y * lambda);
   }
 
   manhattanDistance(vec: Vector) {
-      const deltaX = vec.x - this.x;
-      const deltaY = vec.y - this.y;
-      return Math.abs(deltaX) + Math.abs(deltaY);
+    const deltaX = vec.x - this.x;
+    const deltaY = vec.y - this.y;
+    return Math.abs(deltaX) + Math.abs(deltaY);
   }
 
   isAdjacentTo(vec: Vector) {
-      return Math.sqrt((vec.x - this.x) ** 2 + (vec.y - this.y) ** 2) < 2;
+    return Math.sqrt((vec.x - this.x) ** 2 + (vec.y - this.y) ** 2) < 2;
   }
 
   isCollinearTo(vec: Vector) {
-      return this.x == vec.x || this.y == vec.y;
+    return this.x == vec.x || this.y == vec.y;
   }
 
   neg() {
-      return new Vector(-this.x, -this.y);
+    return new Vector(-this.x, -this.y);
   }
 
   gt(other: Vector) {
-      return other.mag < this.mag;
+    return other.mag < this.mag;
   }
 
   eq(other: Vector) {
-      return this.x === other.x && this.y === other.y;
+    return this.x === other.x && this.y === other.y;
   }
 
   clone() {
-      return new Vector(this.x, this.y);
+    return new Vector(this.x, this.y);
   }
 
   get [Symbol.toStringTag]() {
-      return "Vector";
+    return "Vector";
   }
   
   toString() {
-      return `(${this.x}; ${this.y})`
+    return `(${this.x}; ${this.y})`
   }
 
   getIn<T>(grid: T[][]): T | null {
-      return grid[this.y]?.[this.x];
+    return grid[this.y]?.[this.x];
   }
 
   flipX(): Vector {
@@ -565,4 +565,59 @@ export function memoize<T, U>(fn: (arg: T) => U): (arg: T) => U {
     }
     return cache.get(arg)!;
   };
+}
+
+export type EqualityCheck<T> = (a: T, b: T) => boolean;
+export function unique<T>(elements: T[], areEqual?: EqualityCheck<T>): T[] {
+  if (areEqual) {
+    const result: T[] = [];
+    elements.forEach(element => {
+      if (!result.some((t) => areEqual(element, t))) {
+        result.push(element);
+      }
+    });
+    return result;
+  }
+  return [...new Set<T>(elements)];
+}
+
+/**
+ * Returns the first layer of positions just outside the
+ * area accessible by [position] at Manhattan distance [disance].
+ * @param position The center of the circle/diamond
+ * @param distance The distance between the outer layer of the inside of the diamond and the center
+ * @example
+ * The area marked with `-` is the area accessible by C at distance 2.
+ * This function returns the positions marked by #.
+ * 
+ *   012345678
+ * 0 .........
+ * 1 ....#....
+ * 2 ...#-#...
+ * 3 ..#---#..
+ * 4 .#--C--#.
+ * 5 ..#---#..
+ * 6 ...#-#...
+ * 7 ....#....
+ * 8 .........
+ */
+export function manhattanCircle(position: Vector, distance: number): Vector[] {
+  const results: Vector[] = [];
+  let rendezvous = false;
+  for (let dx = 0, y = position.y - distance - 1; dx >= 0; rendezvous ? dx-- : dx++, y++) {
+    results.push(new Vector(position.x - dx, y));
+    results.push(new Vector(position.x + dx, y));
+    if (y == position.y) rendezvous = true;
+  }
+  // No point in checking every item for uniqueness if the results are many
+  if (results.length > 1e4) return results;
+  return unique(results, (a, b) => a.eq(b));
+}
+
+export function manhattanCircumference(position: Vector, distance: number): Vector[] {
+  const results: Vector[] = [];
+  for (let i = 1; i <= distance; i++) {
+    results.push(...manhattanCircle(position, i));
+  }
+  return results;
 }
