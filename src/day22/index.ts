@@ -19,35 +19,36 @@ const part1 = (rawInput: string) => {
 const part2 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
-  const deltas = Array.from({ length: input.length })
-    .map(() => [] as number[]);
+  // We consider a sequence of four [-9...9] values to be a 
+  // 4-digit base-19 number offset by 9 [0...I].
+  // We can then use the sequence's number value to speed up
+  // the process.
+  //
+  // This has brought the runtime down from 10s to ~720ms on my machine.
+  const sequenceCeiling = 19 ** 4;
   
-  const seen = new Set<string>();
+  const valuesForSequence = new Map<number, number>();
+  input.forEach((rng) => {
+    let sequence = 0;
+    const bought = new Set<number>();
 
-  const valuesForSequence = new Map<string, number>();
-  const consideredMonkeys = new Set<string>();
-
-  for (let i = 0; i < 2000; i++) {
-    input.forEach((rng, j) => {
+    for (let i = 0; i < 2000; i++) {
       const oldDigit = rng.seed % 10;
       const newDigit = rng.next() % 10;
       const delta = newDigit - oldDigit;
 
-      deltas[j].push(delta);
+      sequence = (sequence * 19 + delta + 9) % sequenceCeiling;
 
       if (i >= 3) {
-        const seq = deltas[j].slice(deltas[j].length - 4).join(",");
-        seen.add(seq);
-
-        const key = `${seq},${j}`;
-
-        if (!consideredMonkeys.has(key)) {
-          valuesForSequence.set(seq, (valuesForSequence.get(seq) ?? 0) + newDigit);
-          consideredMonkeys.add(key);
+        if (bought.has(sequence)) {
+          continue;
         }
+
+        bought.add(sequence);
+        valuesForSequence.set(sequence, (valuesForSequence.get(sequence) ?? 0) + newDigit);
       }
-    });
-  }
+    }
+  });
 
   return utils.max(valuesForSequence.values())
 };
