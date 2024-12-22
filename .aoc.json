@@ -311,13 +311,13 @@
     {
       "part1": {
         "solved": true,
-        "time": 38.34028000000001,
+        "time": 34.63863700000002,
         "attempts": [],
         "result": 19927218456
       },
       "part2": {
         "solved": true,
-        "time": 723.902426,
+        "time": 634.907802,
         "attempts": [],
         "result": 2189
       }

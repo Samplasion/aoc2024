@@ -2,13 +2,13 @@ export default class RNG {
   constructor(public seed: number) {}
 
   next(): number {
-    this.mix(this.seed * 64);
+    this.mix(this.seed << 6);
     this.prune();
 
-    this.mix(Math.floor(this.seed / 32));
+    this.mix(this.seed >> 5);
     this.prune();
 
-    this.mix(this.seed * 2048);
+    this.mix(this.seed << 11);
     this.prune();
 
     return this.seed;
