@@ -175,16 +175,16 @@ export default class Grid<T> {
     const directions = Vector.DIRECTIONS;
   
     const distance: number[][] = Array.from(
-      { length: rows },
-      () => Array(cols).fill(Infinity),
+      { length: cols },
+      () => Array(rows).fill(Infinity),
     );
     const previous: (Vector | null)[][] = Array.from(
-      { length: rows },
-      () => Array(cols).fill(null),
+      { length: cols },
+      () => Array(rows).fill(null),
     );
     const visited: boolean[][] = Array.from(
-      { length: rows },
-      () => Array(cols).fill(false),
+      { length: cols },
+      () => Array(rows).fill(false),
     );
   
     const queue: { point: Vector; dist: number }[] = [];
@@ -240,5 +240,48 @@ export default class Grid<T> {
     }
   
     return null;
+  }
+
+  getAllPaths(start: Vector, end: Vector, isWalkable: (value: T) => boolean): Vector[][] {
+    const queue = [{ pos: start, path: [] as Vector[] }];
+    const distances: { [key: string]: number } = {};
+
+    if (start === end) return [[end]];
+
+    const allPaths: Vector[][] = [];
+    while (queue.length) {
+      const current = queue.shift();
+      if (current === undefined) break;
+
+      if (current.pos.x === end.x && current.pos.y === end.y) {
+        allPaths.push([...current.path, current.pos]);
+        continue;
+      }
+      if (distances[`${current.pos.x},${current.pos.y}`] !== undefined && distances[`${current.pos.x},${current.pos.y}`] < current.path.length) continue;
+
+      Vector.DIRECTIONS.forEach((direction) => {
+        const position = current.pos.add(direction);
+
+        if (this.isOutOfBounds(position.x, position.y)) return;
+        if (!isWalkable(this.get(position)!)) return;
+
+        const newPath = [...current.path, current.pos];
+        if (distances[`${position.x},${position.y}`] === undefined || distances[`${position.x},${position.y}`] >= newPath.length) {
+          queue.push({ pos: position, path: newPath });
+          distances[`${position.x},${position.y}`] = newPath.length;
+        }
+
+        // const button = Object.values(t).find(button => button.x === position.x && button.y === position.y);
+        // if (button !== undefined) {
+        //     const newPath = current.path + direction;
+        //     if (distances[`${position.x},${position.y}`] === undefined || distances[`${position.x},${position.y}`] >= newPath.length) {
+        //         queue.push({ ...position, path: newPath });
+        //         distances[`${position.x},${position.y}`] = newPath.length;
+        //     }
+        // }
+      });
+    }
+
+    return allPaths.sort((a, b) => a.length - b.length);
   }
 }

@@ -566,6 +566,16 @@ export function memoize<T, U>(fn: (arg: T) => U): (arg: T) => U {
     return cache.get(arg)!;
   };
 }
+export function memoize2<T1, T2, U>(fn: (arg1: T1, arg2: T2) => U): (arg1: T1, arg2: T2) => U {
+  const cache = new Map<string, U>();
+  return (arg1: T1, arg2: T2) => {
+    const key = `${arg1},${arg2}`;
+    if (!cache.has(key)) {
+      cache.set(key, fn(arg1, arg2));
+    }
+    return cache.get(key)!;
+  };
+}
 
 export type EqualityCheck<T> = (a: T, b: T) => boolean;
 export function unique<T>(elements: T[], areEqual?: EqualityCheck<T>): T[] {

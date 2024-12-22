@@ -16,7 +16,7 @@ const parseInput = (rawInput: string) => {
 const part1 = (rawInput: string) => {
   const { grid, moves } = parseInput(rawInput);
   
-  let robot = utils.Vector.fromPosition(grid.findIndex(value => value == "@")!);
+  let robot = grid.findIndex(value => value == "@")!;
 
   for (const move of moves) {
     let newPos = robot;
@@ -71,7 +71,7 @@ const part2 = (rawInput: string) => {
     grid.set(2*x + 1, y, b);
   });
 
-  let robot = utils.Vector.fromPosition(grid.findIndex(value => value == "@")!);
+  let robot = grid.findIndex(value => value == "@")!;
 
   // console.log(grid.toPrettyString());
   

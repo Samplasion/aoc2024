@@ -294,14 +294,18 @@
     },
     {
       "part1": {
-        "solved": false,
-        "time": null,
-        "attempts": []
+        "solved": true,
+        "time": 2.4338410000000295,
+        "attempts": [
+          232338
+        ],
+        "result": 219366
       },
       "part2": {
-        "solved": false,
-        "time": null,
-        "attempts": []
+        "solved": true,
+        "time": 42.26315199999999,
+        "attempts": [],
+        "result": 271631192020464
       }
     },
     {
