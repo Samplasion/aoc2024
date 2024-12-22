@@ -631,3 +631,13 @@ export function manhattanCircumference(position: Vector, distance: number): Vect
   }
   return results;
 }
+
+export function max(i: Iterable<number>): number {
+  let max = -Infinity;
+  for (const n of i) {
+    if (n > max) {
+      max = n;
+    }
+  }
+  return max;
+}
