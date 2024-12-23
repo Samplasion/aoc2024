@@ -325,13 +325,13 @@
     {
       "part1": {
         "solved": true,
-        "time": 32.16330799999997,
+        "time": 165.877232,
         "attempts": [],
         "result": 1366
       },
       "part2": {
         "solved": true,
-        "time": 3604.844811999999,
+        "time": 594.4509739999999,
         "attempts": [],
         "result": "bs,cf,cn,gb,gk,jf,mp,qk,qo,st,ti,uc,xw"
       }

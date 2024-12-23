@@ -45,54 +45,28 @@ const part1 = (rawInput: string) => {
 const part2 = (rawInput: string) => {
   const graph = parseInput(rawInput);
 
-  function isClique(size: number, vertices: string[] = []) {
-    for (let i = 0; i < size; i++) {
-      for (let j = i + 1; j < size; j++) {
-        if (!graph[vertices[i]].includes(vertices[j])) {
-          return false;
-        }
-      }
+  function bronKerbosch(clique: string[], queue: string[], excluded: string[]): string[] {
+    if (!queue.length && !excluded.length) {
+      return clique;
     }
-    return true;
+
+    let P = [...queue];
+    let X = [...excluded];
+
+    let cliques = [];
+
+    for (const v of P) {
+      const neighbors = graph[v];
+      cliques.push(bronKerbosch([...clique, v], P.filter((x) => neighbors.includes(x)), X.filter((x) => neighbors.includes(x))));
+      P = P.filter((x) => x !== v);
+      X = [...X, v];
+    }
+
+    return cliques.sort((a, b) => b.length - a.length)[0];
   }
 
-  function maxCliques(i: number, l: number, cliqueVertices: string[], graphVertices: string[]) {
-    const examined: string[] = [...cliqueVertices];
-    let max = l;
-    let maxVertices = [...cliqueVertices];
-
-    for (let j = i + 1; j < graphVertices.length; j++) {
-      examined[l] = graphVertices[j];
-
-      if (isClique(l + 1, examined)) {
-        const nextIter = maxCliques(j, l + 1, examined, graphVertices);
-        if (nextIter.max > max) {
-          max = nextIter.max;
-          maxVertices = nextIter.vertices;
-        }
-      }
-    }
-    return {
-      max,
-      vertices: maxVertices,
-    }
-  }
-
-  function findMaxClique(graph: ReturnType<typeof parseInput>) {
-    const graphVertices = Object.keys(graph);
-    let maxCliqueSize = 0;
-
-    let result: string[] = [];
-
-    for (let i = 0; i < graphVertices.length; i++) {
-      const vertices = [graphVertices[i]];
-      const nextIter = maxCliques(i, 1, vertices, graphVertices);
-      if (nextIter.max > maxCliqueSize && nextIter.vertices.some(v => v.startsWith("t"))) {
-        maxCliqueSize = nextIter.max;
-        result = nextIter.vertices;
-      }
-    }
-    return result;
+  function findMaxClique(graph: ReturnType<typeof parseInput>): string[] {
+    return bronKerbosch([], Object.keys(graph), []);
   }
 
   return findMaxClique(graph).sort().join(",");
