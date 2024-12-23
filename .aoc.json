@@ -324,14 +324,16 @@
     },
     {
       "part1": {
-        "solved": false,
-        "time": null,
-        "attempts": []
+        "solved": true,
+        "time": 32.16330799999997,
+        "attempts": [],
+        "result": 1366
       },
       "part2": {
-        "solved": false,
-        "time": null,
-        "attempts": []
+        "solved": true,
+        "time": 3604.844811999999,
+        "attempts": [],
+        "result": "bs,cf,cn,gb,gk,jf,mp,qk,qo,st,ti,uc,xw"
       }
     },
     {
