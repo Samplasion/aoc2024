@@ -641,3 +641,12 @@ export function max(i: Iterable<number>): number {
   }
   return max;
 }
+
+export function* pairwiseCombinations<T>(arr: T[]): Generator<[T, T]> {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      if (i == j) continue;
+      yield [arr[i], arr[j]];
+    }
+  }
+}

@@ -339,13 +339,13 @@
     {
       "part1": {
         "solved": true,
-        "time": 2.5595619999999997,
+        "time": 1.8559439999999654,
         "attempts": [],
         "result": 55730288838374
       },
       "part2": {
         "solved": true,
-        "time": 1.9129639999999881,
+        "time": 2.664593000000025,
         "attempts": [],
         "result": "fvw,grf,mdb,nwq,wpq,z18,z22,z36"
       }
