@@ -338,14 +338,16 @@
     },
     {
       "part1": {
-        "solved": false,
-        "time": null,
-        "attempts": []
+        "solved": true,
+        "time": 2.5595619999999997,
+        "attempts": [],
+        "result": 55730288838374
       },
       "part2": {
-        "solved": false,
-        "time": null,
-        "attempts": []
+        "solved": true,
+        "time": 1.9129639999999881,
+        "attempts": [],
+        "result": "fvw,grf,mdb,nwq,wpq,z18,z22,z36"
       }
     },
     {
