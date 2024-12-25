@@ -35,7 +35,7 @@
 [![Day 22](https://img.shields.io/badge/Day%2022-%E2%98%85%E2%98%85-brightgreen.svg?style=flat-square)](/src/day22)
 [![Day 23](https://img.shields.io/badge/Day%2023-%E2%98%85%E2%98%85-brightgreen.svg?style=flat-square)](/src/day23)
 [![Day 24](https://img.shields.io/badge/Day%2024-%E2%98%85%E2%98%85-brightgreen.svg?style=flat-square)](/src/day24)
-![Day 25](https://img.shields.io/badge/Day%2025-%E2%98%86%E2%98%86-lightgrey.svg?style=flat-square)
+[![Day 25](https://img.shields.io/badge/Day%2025-%E2%98%85%E2%98%86-yellow.svg?style=flat-square)](/src/day25)
 <!--/SOLUTIONS-->
 
 _Click a badge to go to the specific day's solution._
@@ -89,7 +89,7 @@ aoc run 25
 |  22  | ✅ (in 34.6ms) | ✅ (in 634ms) | 669ms |
 |  23  | ✅ (in 165ms) | ✅ (in 594ms) | 760ms |
 |  24  | ✅ (in 1.86ms) | ✅ (in 2.66ms) | 4.52ms |
-|  25  | ❌ | ❌ |  |
+|  25  | ✅ (in 6.62ms) | ❌ | 9.14ms |
 <!--/RESULTS-->
 
 ---
