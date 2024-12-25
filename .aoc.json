@@ -358,9 +358,10 @@
         "result": 3663
       },
       "part2": {
-        "solved": false,
+        "solved": true,
         "time": 2.5230119999999943,
-        "attempts": []
+        "attempts": [],
+        "result": ":)"
       }
     }
   ]
