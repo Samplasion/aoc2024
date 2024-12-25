@@ -9,12 +9,8 @@ const parseInput = (rawInput: string) => {
 const part1 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
-  const startPosition = utils.Vector.fromPosition(
-    input.findIndex((v) => v === "S")!,
-  );
-  const endPosition = utils.Vector.fromPosition(
-    input.findIndex((v) => v === "E")!,
-  );
+  const startPosition = input.findIndex((v) => v === "S")!;
+  const endPosition = input.findIndex((v) => v === "E")!;
 
   const { distance: score } = dijkstra<string>(
     input,
@@ -81,7 +77,7 @@ function dijkstra<T>(
 
         const beforePrevious = previous[x]?.[y] == null
           ? new utils.Vector(start.x - 1, start.y)
-          : utils.Vector.fromPosition(previous[x]?.[y]);
+          : previous[x]?.[y];
         const previousP = new utils.Vector(x, y);
         const current = new utils.Vector(newX, newY);
 
@@ -113,12 +109,8 @@ function dijkstra<T>(
 const part2 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
-  const startPosition = utils.Vector.fromPosition(
-    input.findIndex((v) => v === "S")!,
-  );
-  const endPosition = utils.Vector.fromPosition(
-    input.findIndex((v) => v === "E")!,
-  );
+  const startPosition = input.findIndex((v) => v === "S")!;
+  const endPosition = input.findIndex((v) => v === "E")!;
 
   const seen = [endPosition.toString()];
   let best = 1e9;
@@ -155,69 +147,6 @@ const part2 = (rawInput: string) => {
 
   return new Set(seen).size;
 };
-
-type DirectedPathTracingNode<T> = [...utils.PathTrackingNode<T>, dir: string];
-function bfs<T>(grid: utils.Node<T>[][] | Grid<T>, { matcher, startPosition, endPosition, endCondition }: utils.BFSParameters<T, DirectedPathTracingNode<T>>): { score: number, paths: utils.Node<T>[][] } | null {
-  if (grid instanceof Grid) {
-      grid = grid.toNodes();
-  }
-
-  if (endPosition == null && endCondition == null)
-      throw new Error("Either endPosition or endCondition must not be null");
-
-  // Set of positions
-  const visited: Map<string, number> = new Map([[startPosition.toString(), 0]]);
-  const q: DirectedPathTracingNode<T>[] = [[startPosition.getIn(grid)!, 0, [], ""]];
-
-  let paths: utils.Node<T>[][] = [];
-  let score = Infinity;
-
-  while (q.length != 0) {
-    q.sort((a, b) => a[1] - b[1]);
-    const el = q.shift()!;
-
-    if ((endPosition != null && el[0].position.eq(endPosition)) || (endCondition != null && endCondition(el[0], q))) {
-      const currentScore = el[1];
-      if (currentScore < score) {
-        score = el[1];
-        paths = [[...el[2], el[0]]];
-      } else if (currentScore === score) {
-        paths.push([...el[2], el[0]]);
-      }
-    }
-
-    utils.Vector.DIRECTIONS.forEach(dir => {
-      if (el[3] === dir.neg().direction) return;
-      const target = el[0].position.add(dir);
-      const neighborWeight = el[3] == dir.direction ? 1 : 1001;
-      const weight = el[1] + neighborWeight;
-      // let shouldVisit = !visited.get(target.toString()) || !el[2].map(n => n.position.toString()).includes(target.toString());
-      let shouldVisit = !visited.get(target.toString()) || visited.get(target.toString())! >= el[1];
-      if (el[0].position.y == 7 && dir.isHorizontal || el[0].position.x == 3 && dir.isVertical) {
-        // if (!shouldVisit)
-        //   console.log({
-        //     target: target.toString(),
-        //     src: el[0],
-        //     shouldVisit: shouldVisit,
-        //     has: visited.has(target.toString()),
-        //     get: visited.get(target.toString()),
-        //     wgt: el[1],
-        //     wgtNext: weight,
-        //     value: target.getIn(grid),
-        //     matches: matcher(el[0], target.getIn(grid)!),
-        //     path: [...el[2], el[0]],
-        //   });
-        // shouldVisit = true;
-      }
-      if (target.getIn(grid) != null && shouldVisit && matcher(el[0], target.getIn(grid)!)) {
-        q.push([target.getIn(grid)!, weight, [...el[2], el[0]], dir.direction!]);
-        visited.set(target.toString(), weight);
-      }
-    });
-  }
-
-  return { score, paths };
-}
 
 run({
   part1: {
